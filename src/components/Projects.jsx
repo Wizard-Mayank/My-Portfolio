@@ -3,7 +3,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 
-
 const projects = [
   {
     title: "Vehicle Authentication and Authorization using ML",
@@ -38,59 +37,42 @@ const ProjectCard = ({ project }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Tilt glareEnable={true} glareMaxOpacity={0.45} scale={1.02} className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl">
+    <Tilt
+      glareEnable={true}
+      glareMaxOpacity={0.2}
+      tiltMaxAngleX={5}
+      tiltMaxAngleY={5}
+      scale={1.01}
+      transitionSpeed={1200}
+      className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl"
+    >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="p-5 h-full flex flex-col justify-between"
+        className="p-5 h-full flex flex-col"
       >
         <h3 className="text-xl font-bold mb-1 text-zinc-900 dark:text-white">
-          {project.title} <span className="text-sm font-normal text-zinc-500">({project.year})</span>
+          {project.title}{" "}
+          <span className="text-sm font-normal text-zinc-500">
+            ({project.year})
+          </span>
         </h3>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-2">
-          {project.description.slice(0, 100)}...
+        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+          {open
+            ? project.description
+            : `${project.description.slice(0, 100)}...`}
         </p>
-        <button
-          className="text-xs text-sky-500 hover:underline mt-auto"
-          onClick={() => setOpen(true)}
-        >
-          View Details
-        </button>
 
-        {open && (
-          <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-2xl w-[90%] max-w-md">
-              <h4 className="text-lg font-semibold mb-2 text-zinc-900 dark:text-white">
-                {project.title} ({project.year})
-              </h4>
-              <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-4">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech, idx) => (
-                  <span key={idx} className="px-2 py-1 bg-sky-100 text-sky-600 text-xs rounded-full dark:bg-sky-800 dark:text-sky-200">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="flex gap-4 text-sm">
-                <a href={project.github} className="text-sky-500 hover:underline" target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-                <a href={project.live} className="text-sky-500 hover:underline" target="_blank" rel="noopener noreferrer">
-                  Live Site
-                </a>
-              </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="mt-4 px-4 py-1 bg-zinc-200 dark:bg-zinc-700 rounded text-xs"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
+        {/* View/Close toggle with softened tilt padding */}
+        <div className="absolute right-[4.5%] top-1/2 transform -translate-y-1/2 z-10">
+          <button
+            onClick={() => setOpen(!open)}
+            className="px-3 py-1 text-xs font-semibold rounded-md border border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition-colors bg-white dark:bg-zinc-900"
+          >
+            {open ? "Close" : "View Details"}
+          </button>
+        </div>
       </motion.div>
     </Tilt>
   );
