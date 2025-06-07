@@ -37,7 +37,7 @@ My resume is available for download directly on the website.
 
 ## 🌐 Live Site
 
-Coming soon... (Add link when deployed)
+Coming soon...
 
 ## 📬 Connect with Me
 
