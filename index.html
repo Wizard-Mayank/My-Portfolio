@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
   </head>
   <body>
+    <!-- Light mode floating background (hidden by default) -->
+    <div
+      id="light-bg-visual"
+      class="hidden absolute top-0 left-0 w-full h-full -z-10 blur-xl opacity-40 pointer-events-none"
+    ></div>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
