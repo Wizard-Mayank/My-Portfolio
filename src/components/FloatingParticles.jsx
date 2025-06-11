@@ -2,97 +2,84 @@ import { useEffect, useRef } from "react";
 
 const FloatingParticles = () => {
   const canvasRef = useRef(null);
-  const colorRef = useRef("#38bdf8");
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    let animationFrameId;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+    let particles = [];
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const isDark = document.documentElement.classList.contains("dark");
+    const color = isDark ? "255,255,255" : "0,0,0";
 
-    // Set color based on theme
-    const setColorFromTheme = () => {
-      const isDark = document.documentElement.classList.contains("dark");
-      colorRef.current = isDark ? "#38bdf8" : "#0f172a";
+    const createParticles = (count) => {
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.6,
+        dy: (Math.random() - 0.5) * 0.6,
+      }));
     };
 
-    setColorFromTheme();
-
-    const observer = new MutationObserver(setColorFromTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    const particles = Array.from({ length: 100 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2 + 1,
-      dx: (Math.random() - 0.5) * 0.5,
-      dy: (Math.random() - 0.5) * 0.5,
-    }));
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw particles
-      particles.forEach((p) => {
+    const drawLine = (p1, p2) => {
+      const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+      if (dist < 100) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = colorRef.current;
-        ctx.fill();
-      });
-
-      // Draw connecting lines
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = colorRef.current + "55"; // Semi-transparent
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(${color},${1 - dist / 100})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
       }
+    };
 
-      // Update positions
-      particles.forEach((p) => {
+    let animationId;
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach((p, i) => {
         p.x += p.dx;
         p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+        if (p.x < 0 || p.x > width) p.dx *= -1;
+        if (p.y < 0 || p.y > height) p.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},0.6)`;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          drawLine(p, particles[j]);
+        }
       });
 
-      animationFrameId = requestAnimationFrame(draw);
+      animationId = requestAnimationFrame(animate);
     };
 
-    draw();
+    createParticles(80);
+    animate();
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      createParticles(80);
     };
-    window.addEventListener("resize", handleResize);
 
+    window.addEventListener("resize", handleResize);
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
-      observer.disconnect();
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
+      className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
     />
   );
 };
