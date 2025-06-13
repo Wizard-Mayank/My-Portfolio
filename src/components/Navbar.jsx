@@ -10,11 +10,11 @@ const Navbar = ({ theme, setTheme }) => {
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         <h1 className="text-xl font-bold text-zinc-800 dark:text-white">Mayank</h1>
         <div className="flex items-center gap-6">
-          <ul className="flex flex-nowrap text-sm font-medium text-zinc-700 dark:text-zinc-300 list-none">
-            <li className="mr-8">
+          <ul className="flex gap-6 text-sm font-medium text-zinc-700 dark:text-zinc-300 list-none">
+            <li>
               <a href="#home" className="hover:text-sky-500 transition-colors px-1">Home</a>
             </li>
-            <li className="mr-8">
+            <li>
               <a href="#about" className="hover:text-sky-500 transition-colors px-1">About</a>
             </li>
             <li>

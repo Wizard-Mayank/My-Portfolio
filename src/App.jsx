@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
@@ -9,7 +9,8 @@ import FloatingParticles from "./components/FloatingParticles";
 import CustomCursor from "./components/CustomCursor";
 import Reveal from "./components/Reveal";
 import "./utils/lenis";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
@@ -20,46 +21,77 @@ function App() {
     document.documentElement.classList.add(theme);
   }, [theme]);
 
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const headingY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const subtitleY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+
   return (
-    <div className="relative bg-white text-black dark:bg-black dark:text-white">
-      {/* SmoothScroll must mount before any scrollable content */}
+    <div className="relative overflow-x-hidden bg-white text-black dark:bg-black dark:text-white">
       <SmoothScroll />
-
-      {/* Background Particles (behind content) */}
       <FloatingParticles />
-
-      {/* Custom Cursor (on top of everything) */}
       <CustomCursor />
-
-      {/* Navbar / Theme Toggle */}
       <Navbar theme={theme} setTheme={setTheme} />
 
-      {/* Main content wrapper */}
       <div className="min-h-screen">
         {/* Hero */}
-        <section id="home" className="h-screen flex items-center justify-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: -60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-center"
-          >
+        <section
+          id="home"
+          ref={heroRef}
+          className="h-screen flex items-center justify-center relative z-10"
+        >
+          <motion.div className="text-center">
             <motion.h1
-              className="text-5xl md:text-7xl font-extrabold mb-4 text-sky-400"
+              className="text-5xl md:text-7xl font-extrabold mb-6 text-sky-400"
+              style={{ y: headingY }}
               animate={{
                 textShadow: [
-                  "0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff",
-                  "0 0 10px #06f, 0 0 20px #06f, 0 0 30px #06f",
-                  "0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff",
+                  "0 0 6px #f00, 0 0 12px #f00",
+                  "0 0 6px #0ff, 0 0 12px #0ff",
+                  "0 0 6px #0f0, 0 0 12px #0f0",
+                  "0 0 6px #f00, 0 0 12px #f00",
                 ],
+                scale: [1, 1.02, 1],
               }}
-              transition={{ duration: 5, repeat: Infinity, repeatType: "mirror" }}
+              transition={{
+                textShadow: {
+                  duration: 8,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut",
+                },
+                scale: {
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                },
+              }}
             >
               Hey, I'm Mayank Pandey
             </motion.h1>
-            <p className="text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
-              I craft high-aesthetic, performance-driven web experiences — scroll to explore my world.
-            </p>
+
+            <motion.p
+              style={{ y: subtitleY, opacity }}
+              className="text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto"
+            >
+              <TypeAnimation
+                sequence={[
+                  "I craft high-aesthetic, performance-driven web experiences.",
+                  1000,
+                  "Scroll to explore my world, one pixel at a time.",
+                ]}
+                speed={40}
+                wrapper="span"
+                cursor={true}
+                repeat={0}
+              />
+            </motion.p>
           </motion.div>
         </section>
 
