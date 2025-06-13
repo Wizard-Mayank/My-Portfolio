@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 const FloatingParticles = () => {
   const canvasRef = useRef(null);
+  const colorRef = useRef("255,255,255"); // Default white for dark mode
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -10,8 +11,12 @@ const FloatingParticles = () => {
     let height = (canvas.height = window.innerHeight);
     let particles = [];
 
-    const isDark = document.documentElement.classList.contains("dark");
-    const color = isDark ? "255,255,255" : "0,0,0";
+    const getThemeColor = () =>
+      document.documentElement.classList.contains("dark")
+        ? "255,255,255"
+        : "0,0,0";
+
+    colorRef.current = getThemeColor();
 
     const createParticles = (count) => {
       particles = Array.from({ length: count }, () => ({
@@ -29,7 +34,7 @@ const FloatingParticles = () => {
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = `rgba(${color},${1 - dist / 100})`;
+        ctx.strokeStyle = `rgba(${colorRef.current},${1 - dist / 100})`;
         ctx.lineWidth = 0.5;
         ctx.stroke();
       }
@@ -49,7 +54,7 @@ const FloatingParticles = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color},0.6)`;
+        ctx.fillStyle = `rgba(${colorRef.current},0.6)`;
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -69,10 +74,21 @@ const FloatingParticles = () => {
       createParticles(80);
     };
 
+    const themeObserver = new MutationObserver(() => {
+      colorRef.current = getThemeColor(); // update on theme change
+    });
+
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
     window.addEventListener("resize", handleResize);
+
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
+      themeObserver.disconnect();
     };
   }, []);
 
