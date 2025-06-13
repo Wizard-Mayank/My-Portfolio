@@ -1,32 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+
+    <!-- Preload theme ASAP to avoid flash -->
     <script>
       (function () {
         try {
           const theme = localStorage.getItem("theme") || "dark";
+          document.documentElement.classList.remove("light", "dark");
           document.documentElement.classList.add(theme);
         } catch (e) {}
       })();
     </script>
 
+    <!-- Orbitron font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap"
       rel="stylesheet"
     />
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
+    <!-- Loader Styles -->
+    <style>
+      #loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: black;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.25rem;
+        z-index: 9999;
+        transition: opacity 0.4s ease;
+        letter-spacing: 0.05em;
+      }
+
+      html.light #loader {
+        background: white;
+        color: black;
+      }
+
+      .loader-glow {
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+        }
+        to {
+          text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+        }
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        border-top-color: #0ff;
+        border-radius: 50%;
+        margin-top: 20px;
+        animation: spin 1s linear infinite;
+      }
+
+      html.light .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.2);
+        border-top-color: #06b6d4;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
-  <body>
-    <!-- Light mode floating background (hidden by default) -->
+
+  <body class="overflow-x-hidden relative">
+    <!-- Loader Screen -->
+    <div id="loader">
+      <div class="loader-glow">Launching Portfolio...</div>
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Light background element (optional) -->
     <div
       id="light-bg-visual"
       class="hidden absolute top-0 left-0 w-full h-full -z-10 blur-xl opacity-40 pointer-events-none"
     ></div>
 
     <div id="root"></div>
+
+    <!-- App script -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Fade out loader after hydration -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("loader");
+        if (loader) {
+          setTimeout(() => {
+            loader.classList.add("fade-out");
+          }, 300);
+        }
+      });
+    </script>
   </body>
 </html>
