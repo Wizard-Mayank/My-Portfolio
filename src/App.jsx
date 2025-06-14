@@ -1,9 +1,11 @@
+// src/App.jsx
 import { useState, useEffect, useRef } from "react";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Stats from "./components/Stats";
 import TimelineResume from "./components/TimelineResume";
+import Contact from "./components/Contact";
 import SmoothScroll from "./components/SmoothScroll";
 import FloatingParticles from "./components/FloatingParticles";
 import CustomCursor from "./components/CustomCursor";
@@ -11,9 +13,13 @@ import Reveal from "./components/Reveal";
 import "./utils/lenis";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import InteractiveTerminal from "./components/InteractiveTerminal";
+
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "dark"
+  );
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -21,12 +27,12 @@ function App() {
     document.documentElement.classList.add(theme);
   }, [theme]);
 
+  // Parallax setup for Hero
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
-
   const headingY = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const subtitleY = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
@@ -39,7 +45,7 @@ function App() {
       <Navbar theme={theme} setTheme={setTheme} />
 
       <div className="min-h-screen">
-        {/* Hero */}
+        {/* Hero Section */}
         <section
           id="home"
           ref={heroRef}
@@ -95,12 +101,16 @@ function App() {
           </motion.div>
         </section>
 
-        {/* Other Sections */}
+        {/* Main Content */}
         <Reveal><About /></Reveal>
         <Reveal><Projects /></Reveal>
         <Reveal><Stats /></Reveal>
         <Reveal><TimelineResume /></Reveal>
       </div>
+
+      {/* Terminal‑Style Contact Section */}
+      <Contact />
+      <InteractiveTerminal />
     </div>
   );
 }
