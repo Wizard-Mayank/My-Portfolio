@@ -1,0 +1,5 @@
+# Treat all text files normally
+* text=auto
+
+# Force SVGs to use LF in the repository
+*.svg text eol=lf
