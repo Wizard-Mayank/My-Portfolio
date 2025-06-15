@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Stats from "./components/Stats";
 import TimelineResume from "./components/TimelineResume";
-import Contact from "./components/Contact";
 import SmoothScroll from "./components/SmoothScroll";
 import FloatingParticles from "./components/FloatingParticles";
 import CustomCursor from "./components/CustomCursor";
@@ -14,6 +13,7 @@ import "./utils/lenis";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import InteractiveTerminal from "./components/InteractiveTerminal";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -109,8 +109,10 @@ function App() {
       </div>
 
       {/* Terminal‑Style Contact Section */}
-      <Contact />
       <InteractiveTerminal />
+
+      <Footer className="mt-16" />
+
     </div>
   );
 }

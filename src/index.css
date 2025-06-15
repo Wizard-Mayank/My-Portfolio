@@ -1,8 +1,11 @@
+/* Orbitron Font Import — must be first */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Orbitron Font */
+/* Font family root */
 :root {
   font-family: "Orbitron", sans-serif;
 }
@@ -67,10 +70,162 @@ canvas {
   display: block;
 }
 
+/* Blinking cursor */
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
-.animate-blink {
+.react-console-emulator__prompt-label::after {
+  content: "|";
   animation: blink 1s step-start infinite;
+  margin-left: 2px;
+}
+
+/* Terminal Glass with Super Glow */
+.super-glass-terminal {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid transparent;
+  border-image: linear-gradient(
+      120deg,
+      #00ffc3,
+      #38bdf8,
+      #f472b6,
+      #a78bfa,
+      #00ffc3
+    )
+    1;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow:
+    0 0 8px rgba(0, 255, 149, 0.25),
+    0 0 24px rgba(0, 255, 149, 0.2),
+    0 0 48px rgba(0, 255, 149, 0.15);
+  animation: glow-cycle 6s ease-in-out infinite;
+  color: inherit;
+}
+
+@keyframes glow-cycle {
+  0% {
+    box-shadow:
+      0 0 6px #0fffc3,
+      0 0 16px #0fffc3,
+      0 0 24px #0fffc3;
+  }
+  50% {
+    box-shadow:
+      0 0 10px #38bdf8,
+      0 0 24px #38bdf8,
+      0 0 36px #38bdf8;
+  }
+  100% {
+    box-shadow:
+      0 0 6px #a78bfa,
+      0 0 16px #a78bfa,
+      0 0 24px #a78bfa;
+  }
+}
+
+/* Terminal Text Fix */
+.super-glass-terminal,
+.super-glass-terminal * {
+  color: inherit !important;
+  text-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  font-weight: normal !important;
+}
+
+/* Optional content text color */
+.react-console-emulator__content {
+  color: #00ff99;
+  text-shadow: none !important;
+  filter: none !important;
+}
+.react-console-emulator__content span {
+  color: inherit;
+}
+
+/* Terminal syntax colors */
+.terminal-green {
+  color: #00ff99 !important;
+}
+.terminal-yellow {
+  color: #facc15 !important;
+}
+.terminal-cyan {
+  color: #38bdf8 !important;
+}
+
+/* Full terminal section glass background */
+.glass-terminal-wrapper {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 40px rgba(255, 255, 255, 0.03),
+    0 0 80px rgba(255, 255, 255, 0.05);
+}
+
+.glass-footer {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0, 255, 149, 0.2);
+  box-shadow: 0 -8px 30px rgba(0, 255, 149, 0.05);
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  25% { transform: translate(-0.3px, 0.3px); }
+  50% { transform: translate(0.3px, -0.3px); }
+  75% { transform: translate(-0.4px, 0.4px); }
+}
+
+.animate-glitch {
+  animation: glitch 2s infinite;
+  text-shadow:
+    0 0 2px #0f0,
+    0 0 3px #0f0,
+    0 0 4px #0f0;
+}
+
+/* Softer, cleaner neon-glass look */
+.neon-footer {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -1px 12px rgba(0, 255, 149, 0.1);
+  border-top: 1px solid rgba(0, 255, 149, 0.1);
+  border-radius: 8px 8px 0 0;
+}
+
+.neon-glow:hover {
+  text-shadow:
+    0 0 3px #00ff99,
+    0 0 5px #00ff99,
+    0 0 8px #00ff99;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 3px #00ff99,
+      0 0 6px #00ff99,
+      0 0 9px #00ff99;
+  }
+  50% {
+    text-shadow:
+      0 0 6px #00ff99,
+      0 0 12px #00ff99,
+      0 0 18px #00ff99;
+  }
+}
+
+.neon-pulse {
+  animation: pulseGlow 2s infinite ease-in-out;
 }

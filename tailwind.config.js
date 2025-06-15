@@ -7,6 +7,15 @@ export default {
       colors: {
         accent: '#14b8a6',
       },
+      animation: {
+        glow: "glowPulse 4s ease-in-out infinite",
+      },
+      keyframes: {
+        glowPulse: {
+          "0%, 100%": { boxShadow: "0 0 30px #00ff9560" },
+          "50%": { boxShadow: "0 0 60px #00ff9588" },
+        },
+      },
     },
   },
   plugins: [],
