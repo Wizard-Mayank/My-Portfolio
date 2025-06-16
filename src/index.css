@@ -99,9 +99,7 @@ canvas {
     1;
   border-radius: 1rem;
   padding: 1.75rem;
-  box-shadow:
-    0 0 8px rgba(0, 255, 149, 0.25),
-    0 0 24px rgba(0, 255, 149, 0.2),
+  box-shadow: 0 0 8px rgba(0, 255, 149, 0.25), 0 0 24px rgba(0, 255, 149, 0.2),
     0 0 48px rgba(0, 255, 149, 0.15);
   animation: glow-cycle 6s ease-in-out infinite;
   color: inherit;
@@ -109,22 +107,13 @@ canvas {
 
 @keyframes glow-cycle {
   0% {
-    box-shadow:
-      0 0 6px #0fffc3,
-      0 0 16px #0fffc3,
-      0 0 24px #0fffc3;
+    box-shadow: 0 0 6px #0fffc3, 0 0 16px #0fffc3, 0 0 24px #0fffc3;
   }
   50% {
-    box-shadow:
-      0 0 10px #38bdf8,
-      0 0 24px #38bdf8,
-      0 0 36px #38bdf8;
+    box-shadow: 0 0 10px #38bdf8, 0 0 24px #38bdf8, 0 0 36px #38bdf8;
   }
   100% {
-    box-shadow:
-      0 0 6px #a78bfa,
-      0 0 16px #a78bfa,
-      0 0 24px #a78bfa;
+    box-shadow: 0 0 6px #a78bfa, 0 0 16px #a78bfa, 0 0 24px #a78bfa;
   }
 }
 
@@ -166,8 +155,7 @@ canvas {
   -webkit-backdrop-filter: blur(16px);
   border-radius: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 0 40px rgba(255, 255, 255, 0.03),
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.03),
     0 0 80px rgba(255, 255, 255, 0.05);
 }
 
@@ -180,18 +168,24 @@ canvas {
 }
 
 @keyframes glitch {
-  0%, 100% { transform: translate(0); }
-  25% { transform: translate(-0.3px, 0.3px); }
-  50% { transform: translate(0.3px, -0.3px); }
-  75% { transform: translate(-0.4px, 0.4px); }
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(-0.3px, 0.3px);
+  }
+  50% {
+    transform: translate(0.3px, -0.3px);
+  }
+  75% {
+    transform: translate(-0.4px, 0.4px);
+  }
 }
 
 .animate-glitch {
   animation: glitch 2s infinite;
-  text-shadow:
-    0 0 2px #0f0,
-    0 0 3px #0f0,
-    0 0 4px #0f0;
+  text-shadow: 0 0 2px #0f0, 0 0 3px #0f0, 0 0 4px #0f0;
 }
 
 /* Softer, cleaner neon-glass look */
@@ -205,27 +199,294 @@ canvas {
 }
 
 .neon-glow:hover {
-  text-shadow:
-    0 0 3px #00ff99,
-    0 0 5px #00ff99,
-    0 0 8px #00ff99;
+  text-shadow: 0 0 3px #00ff99, 0 0 5px #00ff99, 0 0 8px #00ff99;
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
-    text-shadow:
-      0 0 3px #00ff99,
-      0 0 6px #00ff99,
-      0 0 9px #00ff99;
+  0%,
+  100% {
+    text-shadow: 0 0 3px #00ff99, 0 0 6px #00ff99, 0 0 9px #00ff99;
   }
   50% {
-    text-shadow:
-      0 0 6px #00ff99,
-      0 0 12px #00ff99,
-      0 0 18px #00ff99;
+    text-shadow: 0 0 6px #00ff99, 0 0 12px #00ff99, 0 0 18px #00ff99;
   }
 }
 
 .neon-pulse {
   animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.hover-neon-pulse:hover {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes rainbowGlow {
+  0% {
+    text-shadow: 0 0 5px #ff0080;
+    color: #ff0080;
+  }
+  25% {
+    text-shadow: 0 0 5px #00ffff;
+    color: #00ffff;
+  }
+  50% {
+    text-shadow: 0 0 5px #00ff00;
+    color: #00ff00;
+  }
+  75% {
+    text-shadow: 0 0 5px #ffff00;
+    color: #ffff00;
+  }
+  100% {
+    text-shadow: 0 0 5px #ff0080;
+    color: #ff0080;
+  }
+}
+
+.rainbow-pulse {
+  animation: rainbowGlow 3s linear infinite;
+}
+
+.underline-glow {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-glow::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00ff99;
+  box-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.underline-glow:hover::after {
+  transform: scaleX(1);
+}
+
+/* Rainbow Footer Border Animation */
+.rainbow-footer {
+  position: relative;
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(
+      90deg,
+      #ff0080,
+      #00ffff,
+      #00ff00,
+      #ffff00,
+      #ff0080
+    )
+    1;
+  animation: rainbow-border 10s linear infinite;
+}
+
+@keyframes rainbow-border {
+  0% {
+    border-image-source: linear-gradient(
+      90deg,
+      #ff0080,
+      #00ffff,
+      #00ff00,
+      #ffff00,
+      #ff0080
+    );
+  }
+  100% {
+    border-image-source: linear-gradient(
+      450deg,
+      #ff0080,
+      #00ffff,
+      #00ff00,
+      #ffff00,
+      #ff0080
+    );
+  }
+}
+
+/* Neon Pulse on Hover */
+.neon-pulse {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.hover\:neon-pulse:hover {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Rainbow Text Animation */
+.rainbow-text {
+  animation: rainbowGlow 3s linear infinite;
+}
+
+@keyframes rainbowGlow {
+  0% {
+    color: #ff0080;
+    text-shadow: 0 0 4px #ff0080;
+  }
+  25% {
+    color: #00ffff;
+    text-shadow: 0 0 4px #00ffff;
+  }
+  50% {
+    color: #00ff00;
+    text-shadow: 0 0 4px #00ff00;
+  }
+  75% {
+    color: #ffff00;
+    text-shadow: 0 0 4px #ffff00;
+  }
+  100% {
+    color: #ff0080;
+    text-shadow: 0 0 4px #ff0080;
+  }
+}
+
+.glass-terminal-wrapper {
+  padding-bottom: 4rem; /* adds breathing space at bottom */
+  padding-bottom: 5rem;
+}
+
+/* Pull footer up to overlap the terminal fade */
+.rainbow-footer {
+  margin-top: -2rem; /* adjust as needed: 2rem = 32px */
+  padding-top: 2rem; /* keep the same internal top padding */
+}
+
+/* Make terminal wrapper position relative */
+.glass-footer {
+  background: rgba(255, 255, 255, 0.06);  /* light glass overlay */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid transparent;
+  border-image: linear-gradient(
+      120deg,
+      #00ffc3,
+      #38bdf8,
+      #f472b6,
+      #a78bfa,
+      #00ffc3
+    ) 1;
+  border-radius: 1rem;
+  box-shadow:
+    0 0 8px rgba(0, 255, 149, 0.25),
+    0 0 24px rgba(0, 255, 149, 0.2),
+    0 0 48px rgba(0, 255, 149, 0.15);
+  animation: glow-cycle 6s ease-in-out infinite;
+  padding: 2rem 1rem;  /* adjust vertical/horizontal as needed */
+  margin-top: 1rem;    /* small gap above to avoid sticking */
+}
+
+/* Reuse your existing glow-cycle keyframes */
+@keyframes glow-cycle {
+  0% {
+    box-shadow:
+      0 0 6px #0fffc3,
+      0 0 16px #0fffc3;
+  }
+  50% {
+    box-shadow:
+      0 0 10px #38bdf8,
+      0 0 24px #38bdf8;
+  }
+  100% {
+    box-shadow:
+      0 0 6px #a78bfa,
+      0 0 16px #a78bfa;
+  }
+}
+.glass-terminal-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6rem;
+  pointer-events: none;
+  /* Fade from terminal dark-grey to footer glass */
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 41, 59, 0) 0%,
+    /* transparent at terminal color */ rgba(30, 41, 59, 0.2) 40%,
+    /* slight terminal tint */ rgba(0, 0, 0, 0.15) 80%
+      /* match footer dark glass bg */
+  );
+  z-index: 20;
+}
+
+/* Light-mode fade: fade into light-mode footer glass */
+html.light .glass-terminal-wrapper::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(248, 250, 252, 0) 0%,
+    /* transparent at terminal */ rgba(248, 250, 252, 0.2) 40%,
+    /* slight terminal tint */ rgba(255, 255, 255, 0.04) 80%
+      /* footer light glass bg */
+  );
+}
+
+/* Unified glassmorphic wrapper for terminal + footer */
+.glass-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(0, 255, 149, 0.3);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 0 12px rgba(0, 255, 149, 0.2),
+    0 0 24px rgba(0, 255, 149, 0.15);
+  animation: glow-cycle 6s ease-in-out infinite;
+  padding: 2rem;           /* padding around both sections */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;               /* space between terminal & footer—but within the same glass */
+}
+
+.glass-footer {
+  max-width: 64rem; /* same as Tailwind max-w-4xl */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Neon Glow Hover Effect for Cards */
+.glow-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05); /* Transparent glass */
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%, #00f0ff55, #ff00ff33, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+.glow-card:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3), 0 0 25px rgba(255, 0, 255, 0.2);
+  transform: scale(1.015);
+}
+
+/* Ensuring content inside isn't blurry or dull */
+.glow-card > * {
+  position: relative;
+  z-index: 2;
 }

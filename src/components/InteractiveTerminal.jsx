@@ -43,7 +43,7 @@ const commands = {
 
 export default function InteractiveTerminal() {
   return (
-    <section className="mt-16 pb-32 px-4">
+    <section className="mt-16 pb-0 px-4">
       <div className="glass-terminal-wrapper rounded-2xl p-8">
         <h2 className="text-center text-3xl font-bold text-accent mb-4">
           Contact Terminal
@@ -90,6 +90,7 @@ export default function InteractiveTerminal() {
             />
           </div>
         </div>
+        {/* Built‑in fade via CSS pseudo‑element now handles the transition */}
       </div>
     </section>
   );

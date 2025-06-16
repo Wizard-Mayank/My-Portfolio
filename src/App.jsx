@@ -15,7 +15,6 @@ import { TypeAnimation } from "react-type-animation";
 import InteractiveTerminal from "./components/InteractiveTerminal";
 import Footer from "./components/Footer";
 
-
 function App() {
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") || "dark"
@@ -43,7 +42,6 @@ function App() {
       <FloatingParticles />
       <CustomCursor />
       <Navbar theme={theme} setTheme={setTheme} />
-
       <div className="min-h-screen">
         {/* Hero Section */}
         <section
@@ -102,17 +100,24 @@ function App() {
         </section>
 
         {/* Main Content */}
-        <Reveal><About /></Reveal>
-        <Reveal><Projects /></Reveal>
-        <Reveal><Stats /></Reveal>
-        <Reveal><TimelineResume /></Reveal>
+        <Reveal>
+          <About />
+        </Reveal>
+        <Reveal>
+          <Projects />
+        </Reveal>
+        <Reveal>
+          <Stats />
+        </Reveal>
+        <Reveal>
+          <TimelineResume />
+        </Reveal>
       </div>
-
-      {/* Terminal‑Style Contact Section */}
-      <InteractiveTerminal />
-
-      <Footer className="mt-16" />
-
+      {/* Unified Glassmorphic Contact + Footer */}+{" "}
+      <section className="glass-container max-w-5xl mx-auto my-16">
+        + <InteractiveTerminal />
+        + <Footer />+{" "}
+      </section>
     </div>
   );
 }
