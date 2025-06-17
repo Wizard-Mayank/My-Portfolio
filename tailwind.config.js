@@ -6,6 +6,7 @@ export default {
     extend: {
       colors: {
         accent: '#14b8a6',
+        accent: '#00ff99', // neon green
       },
       animation: {
         glow: "glowPulse 4s ease-in-out infinite",

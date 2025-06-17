@@ -360,7 +360,7 @@ canvas {
 
 /* Make terminal wrapper position relative */
 .glass-footer {
-  background: rgba(255, 255, 255, 0.06);  /* light glass overlay */
+  background: rgba(255, 255, 255, 0.06); /* light glass overlay */
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 2px solid transparent;
@@ -371,33 +371,26 @@ canvas {
       #f472b6,
       #a78bfa,
       #00ffc3
-    ) 1;
+    )
+    1;
   border-radius: 1rem;
-  box-shadow:
-    0 0 8px rgba(0, 255, 149, 0.25),
-    0 0 24px rgba(0, 255, 149, 0.2),
+  box-shadow: 0 0 8px rgba(0, 255, 149, 0.25), 0 0 24px rgba(0, 255, 149, 0.2),
     0 0 48px rgba(0, 255, 149, 0.15);
   animation: glow-cycle 6s ease-in-out infinite;
-  padding: 2rem 1rem;  /* adjust vertical/horizontal as needed */
-  margin-top: 1rem;    /* small gap above to avoid sticking */
+  padding: 2rem 1rem; /* adjust vertical/horizontal as needed */
+  margin-top: 1rem; /* small gap above to avoid sticking */
 }
 
 /* Reuse your existing glow-cycle keyframes */
 @keyframes glow-cycle {
   0% {
-    box-shadow:
-      0 0 6px #0fffc3,
-      0 0 16px #0fffc3;
+    box-shadow: 0 0 6px #0fffc3, 0 0 16px #0fffc3;
   }
   50% {
-    box-shadow:
-      0 0 10px #38bdf8,
-      0 0 24px #38bdf8;
+    box-shadow: 0 0 10px #38bdf8, 0 0 24px #38bdf8;
   }
   100% {
-    box-shadow:
-      0 0 6px #a78bfa,
-      0 0 16px #a78bfa;
+    box-shadow: 0 0 6px #a78bfa, 0 0 16px #a78bfa;
   }
 }
 .glass-terminal-wrapper::after {
@@ -437,14 +430,12 @@ html.light .glass-terminal-wrapper::after {
   -webkit-backdrop-filter: blur(12px);
   border: 2px solid rgba(0, 255, 149, 0.3);
   border-radius: 1.5rem;
-  box-shadow:
-    0 0 12px rgba(0, 255, 149, 0.2),
-    0 0 24px rgba(0, 255, 149, 0.15);
+  box-shadow: 0 0 12px rgba(0, 255, 149, 0.2), 0 0 24px rgba(0, 255, 149, 0.15);
   animation: glow-cycle 6s ease-in-out infinite;
-  padding: 2rem;           /* padding around both sections */
+  padding: 2rem; /* padding around both sections */
   display: flex;
   flex-direction: column;
-  gap: 2rem;               /* space between terminal & footer—but within the same glass */
+  gap: 2rem; /* space between terminal & footer—but within the same glass */
 }
 
 .glass-footer {
@@ -469,7 +460,12 @@ html.light .glass-terminal-wrapper::after {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(circle at 50% 50%, #00f0ff55, #ff00ff33, transparent);
+  background: radial-gradient(
+    circle at 50% 50%,
+    #00f0ff55,
+    #ff00ff33,
+    transparent
+  );
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -489,4 +485,90 @@ html.light .glass-terminal-wrapper::after {
 .glow-card > * {
   position: relative;
   z-index: 2;
+}
+
+.glow-background-wrapper {
+  position: relative;
+  z-index: 0;
+}
+
+.glow-background-wrapper::before,
+.glow-background-wrapper::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+  transform: translate(-10%, -10%);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 255, 0.06) 0%,
+    transparent 60%
+  );
+  animation: subtle-pulse 10s ease-in-out infinite;
+  filter: blur(120px);
+}
+
+.glow-background-wrapper::after {
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 255, 0.04) 0%,
+    transparent 60%
+  );
+  animation-delay: 4s;
+}
+
+@keyframes subtle-pulse {
+  0%,
+  100% {
+    transform: scale(1) translate(-10%, -10%);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.08) translate(-10%, -10%);
+    opacity: 1;
+  }
+}
+
+html.light .glow-background-wrapper::before,
+html.light .glow-background-wrapper::after {
+  background: radial-gradient(
+    circle,
+    rgba(0, 200, 255, 0.06) 0%,
+    transparent 60%
+  );
+}
+
+/* Glassy card style used by BackToTop */
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px; /* fully round */
+  box-shadow: 0 4px 16px rgba(0, 255, 149, 0.2), 0 0 8px rgba(0, 255, 149, 0.1);
+}
+
+/* Hide on small screens if desired */
+@media (max-width: 640px) {
+  .fixed.bottom-8.right-8 {
+    display: none;
+  }
+}
+
+.back-to-top-pulse {
+  animation: backtop-pulse 2s infinite ease-in-out;
+}
+
+@keyframes backtop-pulse {
+  0%, 100% {
+    box-shadow: 0 0 6px #38bdf8, 0 0 12px #38bdf8;
+  }
+  50% {
+    box-shadow: 0 0 10px #0ea5e9, 0 0 20px #0ea5e9;
+  }
 }
