@@ -572,3 +572,110 @@ html.light .glow-background-wrapper::after {
     box-shadow: 0 0 10px #0ea5e9, 0 0 20px #0ea5e9;
   }
 }
+
+/* 1. Gradient mask for headline */
+.gradient-mask {
+  background: linear-gradient(90deg, #0ff, #f0f, #0f0, #ff0, #0ff);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-slide 8s ease infinite;
+}
+
+@keyframes gradient-slide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 2. CTA Buttons */
+.cta-btn {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #00ffc3;
+  border-radius: 9999px;
+  background: rgba(0, 255, 195, 0.1);
+  color: #00ffc3;
+  overflow: hidden;
+  transition: color 0.3s, background 0.3s;
+}
+.cta-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.cta-btn:hover {
+  background: #00ffc3;
+  color: #000;
+}
+.cta-btn:hover::after {
+  transform: scaleX(1);
+}
+/* Ripple effect */
+.cta-btn:active::after {
+  animation: ripple 0.6s ease-out forwards;
+}
+
+/* 3. Scroll‑Down Cue positioning */
+.scroll-cue {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #38bdf8;
+}
+
+/* Glow halo behind about section */
+#about-highlights {
+  position: relative;
+  z-index: 0;
+}
+#about-highlights > .bg-\[radial-gradient\(circle_at_center,\_rgba\(0,255,195,0\.1\),\_transparent_70%\)\] {
+  z-index: 1;
+}
+
+/* Underline‑glow: grow from left edge */
+.underline-glow {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;           /* ensure it can be hovered */
+  pointer-events: auto;      /* restore pointer events */
+}
+
+.underline-glow::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #00ffc3;
+  box-shadow: 0 0 6px #00ffc3, 0 0 12px #00ffc3;
+  transition: width 0.5s ease;
+}
+
+.underline-glow:hover::after,
+.underline-glow.animate::after {
+  width: 100%;       /* expand to full text width */
+}
+
+/* Optional: trigger underline animation on entry */
+.animate-underline {
+  animation: underline-pop 0.6s forwards;
+}
+
+@keyframes underline-pop {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+.neon-glow-tooltip {
+  text-shadow: 0 0 4px #00ffc3, 0 0 8px #00ffc3;
+  border-radius: 0.5rem;
+}
