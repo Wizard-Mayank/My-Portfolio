@@ -3,7 +3,6 @@ import React from "react";
 import {
   FaGithub,
   FaLinkedin,
-  FaTwitter,
   FaEnvelope,
 } from "react-icons/fa";
 
@@ -17,11 +16,6 @@ const links = [
     icon: <FaLinkedin size={28} />,
     url: "https://linkedin.com/in/pandeymayank369",
     label: "LinkedIn",
-  },
-  {
-    icon: <FaTwitter size={28} />,
-    url: "https://twitter.com/yourhandle",
-    label: "Twitter",
   },
   {
     icon: <FaEnvelope size={28} />,

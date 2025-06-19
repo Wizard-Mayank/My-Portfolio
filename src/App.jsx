@@ -16,10 +16,10 @@ import FloatingParticles from "./components/FloatingParticles";
 import CustomCursor from "./components/CustomCursor";
 import Reveal from "./components/Reveal";
 import Hero from "./components/Hero";
-import InteractiveTerminal from "./components/InteractiveTerminal";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import "./utils/lenis";
+import Contact from "./components/Contact";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -80,8 +80,9 @@ function App() {
         </Reveal>
       </div>
 
-      {/* Interactive Terminal Contact Section */}
-      <InteractiveTerminal />
+      <Reveal>
+        <Contact />
+      </Reveal>
 
       {/* Footer */}
       <Footer />
