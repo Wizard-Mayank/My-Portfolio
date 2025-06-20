@@ -1,23 +1,18 @@
 import { useState, useEffect } from "react";
 import AboutHighlights from "./components/AboutHighlights";
 import TechStack from "./components/TechStack";
-import Services from "./components/Services";
-import Testimonials from "./components/Testimonials";
-import Blog from "./components/Blog";
 import Achievements from "./components/Achievements";
 import SocialLinks from "./components/SocialLinks";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Stats from "./components/Stats";
-import TimelineResume from "./components/TimelineResume";
 import SmoothScroll from "./components/SmoothScroll";
 import FloatingParticles from "./components/FloatingParticles";
 import CustomCursor from "./components/CustomCursor";
 import Reveal from "./components/Reveal";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
-import BackToTop from "./components/BackToTop";
 import "./utils/lenis";
 import Contact from "./components/Contact";
 
@@ -31,6 +26,22 @@ function App() {
     document.documentElement.classList.remove("dark", "light");
     document.documentElement.classList.add(theme);
   }, [theme]);
+
+  useEffect(() => {
+    console.clear();
+    console.log(
+      "%c🚀 Welcome, Dev!",
+      "color: #00ffc3; font-size: 16px; font-weight: bold; background: #000; padding: 4px;"
+    );
+    console.log(
+      "%cThis portfolio was built with ✨ vibe coding + ChatGPT fire 🔥",
+      "color: #14b8a6; font-size: 12px;"
+    );
+    console.log(
+      "%cMade by Mayank · 2025",
+      "color: #999; font-size: 10px;"
+    );
+  }, []);
 
   return (
     <div className="relative overflow-x-hidden bg-white text-black dark:bg-black dark:text-white">
@@ -52,19 +63,7 @@ function App() {
           <TechStack />
         </Reveal>
         <Reveal>
-          <Services />
-        </Reveal>
-        <Reveal>
-          <Testimonials />
-        </Reveal>
-        <Reveal>
-          <Blog />
-        </Reveal>
-        <Reveal>
           <Achievements />
-        </Reveal>
-        <Reveal>
-          <SocialLinks />
         </Reveal>
         <Reveal>
           <About />
@@ -75,20 +74,18 @@ function App() {
         <Reveal>
           <Stats />
         </Reveal>
-        <Reveal>
-          <TimelineResume />
-        </Reveal>
       </div>
 
       <Reveal>
         <Contact />
       </Reveal>
 
+      <Reveal>
+        <SocialLinks />
+      </Reveal>
+
       {/* Footer */}
       <Footer />
-
-      {/* Back To Top Button */}
-      <BackToTop />
     </div>
   );
 }

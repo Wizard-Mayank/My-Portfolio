@@ -12,14 +12,6 @@ const achievements = [
     title: "Coursera ML Specialization",
     icon: <SiCoursera size={32} />,
   },
-  {
-    title: "3× Hackathon Winner",
-    icon: <FaTrophy size={32} />,
-  },
-  {
-    title: "Published on Hacker News",
-    icon: <FaNewspaper size={32} />,
-  },
 ];
 
 export default function Achievements() {

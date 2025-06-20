@@ -1,100 +1,115 @@
-// src/components/Contact.jsx
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Mail, User, MessageCircle } from "lucide-react";
 
 const Contact = () => {
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const validate = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const newErrors = {};
+
+    if (!form.name.value.trim()) newErrors.name = "Please enter your name.";
+    if (!form.email.value.trim() || !form.email.value.includes("@"))
+      newErrors.email = "Enter a valid email address.";
+    if (!form.message.value.trim())
+      newErrors.message = "Please enter a message.";
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      setSubmitted(true);
+      alert("✅ Message sent!");
+      form.reset();
+    }
+  };
+
   return (
-    <section id="contact" className="py-24 px-6">
+    <section id="contact" className="py-24 px-4 md:px-8 relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <div className="bg-radial-glow" />
+      </div>
+
       <motion.div
-        className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 glow-background-wrapper"
-        initial={{ opacity: 0, y: 80 }}
+        className="relative z-10 glow-card max-w-4xl mx-auto p-8 md:p-14 rounded-2xl shadow-xl backdrop-blur-lg"
+        initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        {/* Left Panel */}
-        <div className="flex-1 flex flex-col justify-center gap-6 text-center md:text-left">
-          <h2 className="text-4xl font-bold gradient-mask">Let’s Work Together</h2>
-          <p className="text-zinc-500 dark:text-zinc-400 max-w-md mx-auto md:mx-0">
-            Got an idea, a freelance project, or just want to connect? I'm always open to new collaborations and tech chats.
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold gradient-mask">
+            Let’s Work Together
+          </h2>
+          <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-sm md:text-base">
+            Have a project, idea, or just want to say hello? Let’s connect and create something epic together.
           </p>
-          <div className="flex justify-center md:justify-start gap-4 mt-4">
-            <a href="mailto:30517csaiml@gmail.com" className="underline-glow">Email</a>
-            <a href="https://github.com/Wizard-Mayank" target="_blank" rel="noopener noreferrer" className="underline-glow">GitHub</a>
-            <a href="https://linkedin.com/in/pandeymayank369" target="_blank" rel="noopener noreferrer" className="underline-glow">LinkedIn</a>
-          </div>
         </div>
 
-        {/* Right Panel — Form */}
-        <motion.form
-          className="flex-1 bg-white/5 dark:bg-black/20 backdrop-blur-md p-8 rounded-2xl glow-card shadow-xl"
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Message sent! 🚀");
-          }}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <div className="flex flex-col gap-6">
-            {/* Floating Label Field */}
-            <div className="relative">
+        {/* Form */}
+        <div className="w-full flex justify-center">
+          <form onSubmit={validate} className="w-[90%] max-w-lg space-y-6 text-white" noValidate>
+
+            {/* Name Field */}
+            <div className="flex items-center gap-4">
+              <div className="min-w-[60px] flex items-center gap-1 text-cyan-400">
+                <User className="w-5 h-5" />
+                <span>:</span>
+              </div>
               <input
                 type="text"
                 name="name"
-                id="name"
-                required
-                className="peer bg-transparent border border-zinc-500 w-full px-4 pt-6 pb-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                placeholder="Your Name"
+                className={`neon-input flex-1 ${
+                  errors.name ? "input-error" : submitted ? "input-success" : ""
+                }`}
               />
-              <label
-                htmlFor="name"
-                className="absolute left-4 top-2 text-xs text-zinc-400 peer-focus:text-cyan-400 transition-all"
-              >
-                Your Name
-              </label>
             </div>
+            {errors.name && <p className="input-feedback">{errors.name}</p>}
 
-            <div className="relative">
+            {/* Email Field */}
+            <div className="flex items-center gap-4">
+              <div className="min-w-[60px] flex items-center gap-1 text-cyan-400">
+                <Mail className="w-5 h-5" />
+                <span>:</span>
+              </div>
               <input
                 type="email"
                 name="email"
-                id="email"
-                required
-                className="peer bg-transparent border border-zinc-500 w-full px-4 pt-6 pb-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+                placeholder="Your Email"
+                className={`neon-input flex-1 ${
+                  errors.email ? "input-error" : submitted ? "input-success" : ""
+                }`}
               />
-              <label
-                htmlFor="email"
-                className="absolute left-4 top-2 text-xs text-zinc-400 peer-focus:text-pink-400 transition-all"
-              >
-                Your Email
-              </label>
             </div>
+            {errors.email && <p className="input-feedback">{errors.email}</p>}
 
-            <div className="relative">
+            {/* Message Field */}
+            <div className="flex items-start gap-4">
+              <div className="min-w-[60px] flex items-center gap-1 mt-2 text-cyan-400">
+                <MessageCircle className="w-5 h-5" />
+                <span>:</span>
+              </div>
               <textarea
                 name="message"
-                id="message"
                 rows="5"
-                required
-                className="peer bg-transparent border border-zinc-500 w-full px-4 pt-6 pb-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-lime-400"
-              ></textarea>
-              <label
-                htmlFor="message"
-                className="absolute left-4 top-2 text-xs text-zinc-400 peer-focus:text-lime-400 transition-all"
-              >
-                Your Message
-              </label>
+                placeholder="Your Message"
+                className={`neon-input flex-1 resize-none ${
+                  errors.message ? "input-error" : submitted ? "input-success" : ""
+                }`}
+              />
             </div>
+            {errors.message && <p className="input-feedback">{errors.message}</p>}
 
-            <button
-              type="submit"
-              className="cta-btn self-start mt-2"
-            >
-              ✉️ Send Message
-            </button>
-          </div>
-        </motion.form>
+            {/* Submit */}
+            <div className="text-center mt-4">
+              <button type="submit" className="cta-btn">
+                ✉️ Send Message
+              </button>
+            </div>
+          </form>
+        </div>
       </motion.div>
     </section>
   );
