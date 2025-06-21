@@ -63,7 +63,7 @@ const Hero = () => {
             View Projects
           </button>
           <a
-            href="/resume.pdf"
+            href="/Mayank_Resume.pdf"
             download
             className="cta-btn"
           >
