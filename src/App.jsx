@@ -37,10 +37,7 @@ function App() {
       "%cThis portfolio was built with ✨ vibe coding + ChatGPT fire 🔥",
       "color: #14b8a6; font-size: 12px;"
     );
-    console.log(
-      "%cMade by Mayank · 2025",
-      "color: #999; font-size: 10px;"
-    );
+    console.log("%cMade by Mayank · 2025", "color: #999; font-size: 10px;");
   }, []);
 
   return (

@@ -29,7 +29,12 @@ const Hero = () => {
             scale: [1, 1.02, 1],
           }}
           transition={{
-            scale: { duration: 4, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
+            scale: {
+              duration: 4,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            },
           }}
           className="gradient-mask text-5xl md:text-7xl font-extrabold mb-6"
         >
@@ -57,16 +62,16 @@ const Hero = () => {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <button
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document
+                .getElementById("projects")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
             className="cta-btn"
           >
             View Projects
           </button>
-          <a
-            href="/Mayank_Resume.pdf"
-            download
-            className="cta-btn"
-          >
+          <a href="/Mayank_Resume.pdf" download className="cta-btn">
             Download Resume
           </a>
         </div>
@@ -81,7 +86,11 @@ const Hero = () => {
             stroke="currentColor"
             strokeWidth={2}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </div>
       </motion.div>

@@ -8,7 +8,7 @@ const projects = [
     title: "Vehicle Authentication and Authorization using ML",
     year: "2025",
     description:
-      "Developed a vehicle recognition system using number plate recognition and ML for unique identification.",
+      "Developed a machine learning-based system for vehicle authentication and authorization using number plate recognition. The system uses OpenCV to extract license plate information from real-time images and applies trained ML models to verify authenticity. It was built to enhance security in private and commercial parking systems, ensuring only authorized vehicles are granted access.",
     tech: ["Python", "Machine Learning", "OpenCV"],
     github: "#",
     live: "#",
@@ -17,7 +17,7 @@ const projects = [
     title: "Hand Gesture Image Recognition",
     year: "2024",
     description:
-      "Implemented a hand gesture recognition system using deep learning techniques in Python.",
+      "Built a hand gesture recognition model using deep learning frameworks like TensorFlow and Keras. The model was trained on a custom dataset of labeled hand gestures and can accurately detect and classify gestures in real-time. This system can be integrated into gesture-controlled applications such as virtual UI control, sign language interpretation, and smart devices.",
     tech: ["Python", "TensorFlow", "Keras"],
     github: "#",
     live: "#",
@@ -26,7 +26,7 @@ const projects = [
     title: "UMAS: A Weather Prediction Model",
     year: "2024",
     description:
-      "Created a machine learning model for weather prediction using Python and Google Colab.",
+      "Created UMAS, a machine learning-based weather forecasting model that predicts temperature, humidity, and rainfall using historical datasets. The system was trained and tested on Google Colab using Scikit-learn, delivering high accuracy and reliable forecasts. Designed to aid small farmers and rural users by providing accessible weather predictions without requiring third-party APIs or paid platforms.",
     tech: ["Python", "Scikit-learn", "Google Colab"],
     github: "#",
     live: "#",
@@ -50,22 +50,23 @@ const ProjectCard = ({ project }) => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="p-5 h-full flex flex-col"
+        className="p-5 h-full flex flex-col justify-between"
       >
-        <h3 className="text-xl font-bold mb-1 text-zinc-900 dark:text-white">
-          {project.title}{" "}
-          <span className="text-sm font-normal text-zinc-500">
-            ({project.year})
-          </span>
-        </h3>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-          {open
-            ? project.description
-            : `${project.description.slice(0, 100)}...`}
-        </p>
+        <div>
+          <h3 className="text-xl font-bold mb-1 text-zinc-900 dark:text-white">
+            {project.title}{" "}
+            <span className="text-sm font-normal text-zinc-500">
+              ({project.year})
+            </span>
+          </h3>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+            {open
+              ? project.description
+              : `${project.description.slice(0, 100)}...`}
+          </p>
+        </div>
 
-        {/* View/Close toggle with softened tilt padding */}
-        <div className="absolute right-[4.5%] top-1/2 transform -translate-y-1/2 z-10">
+        <div className="mt-auto text-right pr-10">
           <button
             onClick={() => setOpen(!open)}
             className="px-3 py-1 text-xs font-semibold rounded-md border border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition-colors bg-white dark:bg-zinc-900"

@@ -380,3 +380,70 @@ html.dark .neon-input {
 .finger-nudge {
   animation: slowBounce 1.4s infinite;
 }
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 3s infinite ease-out;
+}
+
+.radar div {
+  position: absolute;
+  border: 2px solid #06b6d4; /* cyan-400 */
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: radarRipple 2s infinite;
+}
+
+.radar div:nth-child(1) {
+  width: 4rem;
+  height: 4rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 0s;
+}
+.radar div:nth-child(2) {
+  width: 6rem;
+  height: 6rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 0.3s;
+}
+.radar div:nth-child(3) {
+  width: 8rem;
+  height: 8rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 0.6s;
+}
+.radar div:nth-child(4) {
+  width: 10rem;
+  height: 10rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 0.9s;
+}
+
+@keyframes radarRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
