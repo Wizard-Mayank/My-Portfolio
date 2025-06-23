@@ -71,7 +71,7 @@ const Hero = () => {
           >
             View Projects
           </button>
-          <a href="/Mayank_Resume.pdf" download className="cta-btn">
+          <a href="/Mayank's Resume.pdf" download className="cta-btn">
             Download Resume
           </a>
         </div>
