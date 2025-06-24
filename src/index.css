@@ -136,7 +136,12 @@ html.dark button {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(circle at 50% 50%, #00f0ff55, #ff00ff33, transparent);
+  background: radial-gradient(
+    circle at 50% 50%,
+    #00f0ff55,
+    #ff00ff33,
+    transparent
+  );
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -157,7 +162,8 @@ html.dark button {
 html.light .glow-card {
   background: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(14, 165, 233, 0.3);
-  box-shadow: 0 0 10px rgba(14, 165, 233, 0.1), 0 0 20px rgba(139, 92, 246, 0.08);
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.1),
+    0 0 20px rgba(139, 92, 246, 0.08);
 }
 
 .cta-btn {
@@ -289,10 +295,7 @@ textarea:-webkit-autofill {
 .neon-input:focus {
   outline: none;
   border: 1px solid #00ffc3;
-  box-shadow:
-    0 0 6px #00ffc3,
-    0 0 12px #00ffc36e,
-    inset 0 0 6px #00ffc3;
+  box-shadow: 0 0 6px #00ffc3, 0 0 12px #00ffc36e, inset 0 0 6px #00ffc3;
   background: rgba(255, 255, 255, 0.07);
 }
 html.dark .neon-input {
@@ -445,5 +448,64 @@ html.dark .neon-input {
   100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0;
+  }
+}
+
+/* Fix list spacing + remove bullets globally for exploring list */
+.exploring-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Glow hover effect on each bullet */
+.exploring-list li {
+  margin: 0;
+  padding: 12px 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.exploring-list li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.3);
+}
+
+/* Glowing futuristic text */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 18px rgba(255, 0, 255, 0.4);
+}
+
+.underline-animated {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-animated::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #00ffff, #00ffffaa);
+  animation: underlineSlide 3s ease-in-out infinite;
+}
+
+@keyframes underlineSlide {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0.2;
   }
 }

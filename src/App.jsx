@@ -15,6 +15,7 @@ import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import "./utils/lenis";
 import Contact from "./components/Contact";
+import CurrentlyExploring from "./components/CurrentlyExploring.jsx";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -58,6 +59,9 @@ function App() {
         </Reveal>
         <Reveal>
           <TechStack />
+        </Reveal>
+        <Reveal>
+          <CurrentlyExploring />
         </Reveal>
         <Reveal>
           <Achievements />
